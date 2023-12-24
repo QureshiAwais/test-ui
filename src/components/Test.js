@@ -29,10 +29,15 @@ export const Test = () => {
   const fnLogout=()=>{
     const isOk=window.confirm("R u Sure...")
     if(isOk){
-    sessionStorage.clear()
-    ctxData.dispatch({
-      type:"LOGOUT"
-    })
+      if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+        sessionStorage.clear()
+        ctxData.dispatch({
+          type:"LOGOUT"
+        })
+      }else{
+        console.warn('sessionStorage is not available in this environment.');
+
+      }
    }
   }
   const fnSubmit=()=>{

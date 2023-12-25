@@ -23,15 +23,10 @@ export const Login = () => {
         // console.log("then",res)
         const { token, message } = res.data
         if (token) {
-          if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
-            sessionStorage.token = token;
             dispatch({
               type: "LOGIN",
-              payload: true
+              payload: token
             })
-          } else {
-            console.warn('sessionStorage is not available in this environment.');
-          }
         } else {
           setMsg(message)
         }
@@ -40,7 +35,7 @@ export const Login = () => {
         setMsg(res.data)
       })
   }
-
+  
   return (
     <div className='container-fluid'>
       <h3 className='text-center my-3'>Login</h3>

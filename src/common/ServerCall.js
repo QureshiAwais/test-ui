@@ -1,10 +1,10 @@
 import axios from "axios";
 
 class ServerCall{
-    static fnSendGetReq(url){
+    static fnSendGetReq(url,token){
         return axios.get(process.env.NEXT_PUBLIC_BASE_URL+url,{
             headers:{
-                Authorization:sessionStorage.token
+                Authorization:token
             }
         })
     }

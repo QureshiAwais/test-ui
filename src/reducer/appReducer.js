@@ -9,7 +9,7 @@ export const appReducer=(state,action)=>{
         case 'LOGOUT':
             state={
                 ...state,
-                isLoggedIn:false
+                isLoggedIn:null
             }
             break;   
     }

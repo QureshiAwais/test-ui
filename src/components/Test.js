@@ -10,8 +10,9 @@ export const Test = () => {
   const [ans,setAns]=useState({})
   const ctxData=useContext(ctx)
   const fnGetQuestions=async()=>{
+   const token= ctxData.state.isLoggedIn
     try{
-      const res=await ServerCall.fnSendGetReq("test/get-que")
+      const res=await ServerCall.fnSendGetReq("test/get-que",token)
       const _keyObj={}
       res.data.forEach(({_id,ans})=>{
         _keyObj[_id]=ans
@@ -29,15 +30,9 @@ export const Test = () => {
   const fnLogout=()=>{
     const isOk=window.confirm("R u Sure...")
     if(isOk){
-      if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
-        sessionStorage.clear()
         ctxData.dispatch({
           type:"LOGOUT"
         })
-      }else{
-        console.warn('sessionStorage is not available in this environment.');
-
-      }
    }
   }
   const fnSubmit=()=>{
@@ -49,7 +44,7 @@ export const Test = () => {
           marks=marks+1
       }
     })
-    alert("You got "+marks+" marks")
+    alert("You got "+marks+" marks out of 5")
   }
   const fnChange=(eve)=>{
     const {name,value,type,checked}=eve.target;
